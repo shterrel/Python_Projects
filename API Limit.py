@@ -154,14 +154,22 @@ headers_lb_ord = {'accept': 'application/json','X-Auth-Token': ("%s" % auth_toke
 r_lb_ord = requests.get("https://ord.loadbalancers.api.rackspacecloud.com/v1.0/%s/loadbalancers/absolutelimits/?limit=0&offset=0" % (DDI),data=0, headers=headers_lb_ord)
 r_lb_ord_count = requests.get("https://ord.loadbalancers.api.rackspacecloud.com/v1.0/%s/loadbalancers" % (DDI),data=0, headers=headers_lb_ord)
 r_lb_ord_count_b = requests.get("https://ord.loadbalancers.api.rackspacecloud.com/v1.0/%s/loadbalancers?offset=100" % (DDI),data=0, headers=headers_lb_ord)
+r_lb_ord_count_c = requests.get("https://ord.loadbalancers.api.rackspacecloud.com/v1.0/%s/loadbalancers?offset=200" % (DDI),data=0, headers=headers_lb_ord)
+r_lb_ord_count_d = requests.get("https://ord.loadbalancers.api.rackspacecloud.com/v1.0/%s/loadbalancers?offset=300" % (DDI),data=0, headers=headers_lb_ord)
 data_lb_ord = json.loads(r_lb_ord.text)
 data_lb_ord_count = json.loads(r_lb_ord_count.text)
 data_lb_ord_count_b = json.loads(r_lb_ord_count_b.text)
+data_lb_ord_count_c = json.loads(r_lb_ord_count_c.text)
+data_lb_ord_count_d = json.loads(r_lb_ord_count_d.text)
 ord_lb_name = data_lb_ord_count['loadBalancers']
 ord_lb_name_b = data_lb_ord_count_b['loadBalancers']
+ord_lb_name_c = data_lb_ord_count_c['loadBalancers']
+ord_lb_name_d = data_lb_ord_count_d['loadBalancers']
 ord_count = len(ord_lb_name)
 ord_count_b = len(ord_lb_name_b)
-ord_total_count = ord_count + ord_count_b
+ord_count_c = len(ord_lb_name_c)
+ord_count_d = len(ord_lb_name_d)
+ord_total_count = ord_count + ord_count_b + ord_count_c + ord_count_d
 ord_lb_IPV6_LIMIT = data_lb_ord['absolute'][0]['value']
 ord_lb_LOADBALANCER_LIMIT = data_lb_ord['absolute'][1]['value']
 ord_lb_BATCH_DELETE_LIMIT = data_lb_ord['absolute'][2]['value']
@@ -183,23 +191,4 @@ print ("    Node Limit: %s" % ord_lb_NODE_LIMIT)
 #print ("    LB Count: %s" % ord_lb_count)
 #print ("    Batch Delete Limit: %s" % ord_lb_BATCH_DELETE_LIMIT)
 #print ("    Access List Limit: %s" % ord_lb_ACCESS_LIST_LIMIT)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
